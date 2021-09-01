@@ -3,9 +3,12 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  OneToMany
 } from 'typeorm';
 import { Role } from '../role/role.entity';
+import { Course } from '../course/course.entity';
+import { Goal } from '../goal/goal.entity';
 import { PasswordTransformer } from './password.transformer';
 
 @Entity({
@@ -45,6 +48,12 @@ export class User {
   @ManyToMany(() => Role, role => role.users, { eager: true, cascade: true })
   @JoinTable({ name: 'users_roles' })
   public roles: Role[];
+  
+  @OneToMany(() => Course, course => course.creator)
+  public courses: Course[];
+
+  @OneToMany(() => Goal, goal => goal.creator)
+  public goals: Goal[];
 
   toJSON() {
     const { password, ...self } = this;
