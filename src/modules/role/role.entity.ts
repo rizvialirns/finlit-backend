@@ -21,7 +21,7 @@ import {
     description: string;
 
     @ManyToMany(() => User, user => user.roles)
-    @JoinTable()
+    @JoinTable({ name: 'users_roles' })
     public users: User[];
     
   }

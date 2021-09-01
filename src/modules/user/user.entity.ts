@@ -2,7 +2,8 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToMany
+  ManyToMany,
+  JoinTable
 } from 'typeorm';
 import { Role } from '../role/role.entity';
 import { PasswordTransformer } from './password.transformer';
@@ -35,13 +36,14 @@ export class User {
 
   @Column({
     type: 'enum',
-    default: 'MALE',
+    default: 'Male',
     name: 'gender',
     enum: ['Male','Female','Other']
   })
   gender: string;
 
-  @ManyToMany(() => Role, role => role.users)
+  @ManyToMany(() => Role, role => role.users, { eager: true, cascade: true })
+  @JoinTable({ name: 'users_roles' })
   public roles: Role[];
 
   toJSON() {
