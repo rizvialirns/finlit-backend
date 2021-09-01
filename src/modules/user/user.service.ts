@@ -22,8 +22,8 @@ export class UsersService {
     return await this.userRepository.findOne({ email });
   }
 
-  public async create(payload: UserFillableFields): Promise<User> {
-    const user = await this.getByEmail(payload.email);
+  public async create(newUser: User): Promise<User> {
+    const user = await this.getByEmail(newUser.email);
 
     if (user) {
       throw new NotAcceptableException(
@@ -31,6 +31,22 @@ export class UsersService {
       );
     }
 
-    return this.userRepository.save(payload);
+    return this.userRepository.save(newUser);
+  }
+
+  public async update(id: number, newUser: User): Promise<User> {
+    const user = await this.getByEmail(newUser.email);
+
+    if (user) {
+      throw new NotAcceptableException(
+        'User with provided email already created.',
+      );
+    }
+    newUser.id = id;
+    return this.userRepository.save(newUser);
+  }
+  public async delete(id: number): Promise<void> {
+    await this.userRepository.delete(id);
+    return;
   }
 }
