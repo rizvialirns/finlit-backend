@@ -2,8 +2,11 @@ import {
     Entity,
     Column,
     PrimaryGeneratedColumn,
+    ManyToMany,
+    JoinTable
   } from 'typeorm';
-  
+  import { User } from '../user/user.entity';
+
   @Entity({
     name: 'roles',
   })
@@ -16,6 +19,10 @@ import {
   
     @Column({ length: 255 })
     description: string;
+
+    @ManyToMany(() => User, user => user.roles)
+    @JoinTable()
+    public users: User[];
     
   }
   

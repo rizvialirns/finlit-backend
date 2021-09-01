@@ -10,16 +10,19 @@ export class UsersService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
+ public async getAll(): Promise<User[]> {
+    return this.userRepository.find();
+  }
 
-  async get(id: number) {
+  public async get(id: number): Promise<User> {
     return this.userRepository.findOne({ id });
   }
 
-  async getByEmail(email: string) {
+  public async getByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne({ email });
   }
 
-  async create(payload: UserFillableFields) {
+  public async create(payload: UserFillableFields): Promise<User> {
     const user = await this.getByEmail(payload.email);
 
     if (user) {
@@ -28,6 +31,6 @@ export class UsersService {
       );
     }
 
-    return await this.userRepository.save(payload);
+    return this.userRepository.save(payload);
   }
 }

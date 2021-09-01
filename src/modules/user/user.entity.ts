@@ -2,7 +2,9 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  ManyToMany
 } from 'typeorm';
+import { Role } from '../role/role.entity';
 import { PasswordTransformer } from './password.transformer';
 
 @Entity({
@@ -34,10 +36,13 @@ export class User {
   @Column({
     type: 'enum',
     default: 'MALE',
-    name: 'username',
-    length: 255
+    name: 'gender',
+    enum: ['Male','Female','Other']
   })
   gender: string;
+
+  @ManyToMany(() => Role, role => role.users)
+  public roles: Role[];
 
   toJSON() {
     const { password, ...self } = this;
