@@ -21,6 +21,7 @@ import { AppService } from './app.service';
           database: configService.get('DB_DATABASE'),
           entities: [__dirname + './../**/**.entity{.ts,.js}'],
           synchronize: configService.get('DB_SYNC') === 'true',
+          logging: true,
         } as TypeOrmModuleAsyncOptions;
       },
     }),

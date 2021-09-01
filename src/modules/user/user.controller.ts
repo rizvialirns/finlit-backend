@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthService, RegisterPayload } from 'modules/auth';
 import { CurrentUser } from './../common/decorator/current-user.decorator';
 import { User, UsersService } from './../user';
-
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard())
@@ -12,6 +12,7 @@ import { User, UsersService } from './../user';
 export class AuthController {
   constructor(
     private readonly userService: UsersService,
+    private readonly authService: AuthService,
   ) {}
 
   @Get()
