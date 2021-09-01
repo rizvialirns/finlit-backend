@@ -2,7 +2,7 @@ import { IsNotEmpty } from 'class-validator';
 import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {Course} from '../course/course.entity';
 
-@Entity()
+@Entity({name: 'lectures'})
 export class Lecture {
 
     @PrimaryGeneratedColumn()

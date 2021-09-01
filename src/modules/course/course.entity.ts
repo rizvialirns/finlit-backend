@@ -3,13 +3,13 @@ import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne,
 import {User} from '../user/user.entity';
 import {Lecture} from '../lecture/lecture.entity';
 import {Category} from '../category/category.entity';
-import {GoalPackCourses} from '../goalpackcourses/goalpackcourses.entity';
-// export enum CourseLevelEnum {
-//     Beginner,
-//     Intermediate,
-//     Advanced,
-//     Expert,
-// }
+import {GoalPackCourses} from '../goal-pack-courses/goalpackcourses.entity';
+export enum CourseLevelEnum {
+    Beginner='Beginner',
+    Intermediate='Intermediate',
+    Advanced='Advanced',
+    Expert='Expert',
+}
 @Entity({
     name: 'courses',
   })
@@ -49,8 +49,8 @@ export class Course {
     @IsNotEmpty()
     @Column({
         type:'enum',
-        default: 'Beginner',
-        enum: ['Beginner','Intermediate','Advanced','Expert',]
+        default: CourseLevelEnum.Beginner,
+        enum: CourseLevelEnum
     })
     public courseLevel: string;
 

@@ -1,8 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
 import {Column, Entity, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import {User} from '../user/user.entity';
-import { GoalPackCourses } from '../goalpackcourses/goalpackcourses.entity';
-@Entity()
+import { GoalPackCourses } from '../goal-pack-courses/goalpackcourses.entity';
+@Entity({name: 'goals'})
 export class Goal {
 
     @PrimaryGeneratedColumn()
