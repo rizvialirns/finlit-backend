@@ -2,9 +2,12 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToMany
+  ManyToMany,
+  OneToMany
 } from 'typeorm';
 import { Role } from '../role/role.entity';
+import { Course } from '../course/course.entity';
+import { Goal } from '../goal/goal.entity';
 import { PasswordTransformer } from './password.transformer';
 
 @Entity({
@@ -40,6 +43,12 @@ export class User {
     enum: ['Male','Female','Other']
   })
   gender: string;
+
+  @OneToMany(() => Course, course => course.creator)
+  public courses: Course[];
+
+  @OneToMany(() => Goal, goal => goal.creator)
+  public goals: Goal[];
 
   @ManyToMany(() => Role, role => role.users)
   public roles: Role[];
