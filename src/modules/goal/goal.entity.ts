@@ -21,7 +21,7 @@ export class Goal {
     public goalImage: string;
 
     @IsNotEmpty()
-    @Column({length: 255})
+    @Column()
     public originalPrice: number;
 
     @IsNotEmpty()
@@ -29,11 +29,11 @@ export class Goal {
     public onSale: boolean;
 
     @IsNotEmpty()
-    @Column({length: 25})
+    @Column()
     public discountPercent: number;
 
     @IsNotEmpty()
-    @Column()
+    @Column({type: 'jsonb'})
     public skills: string[];
 
     @ManyToOne(() => GoalPackCourses, goalPackCourses => goalPackCourses.goals)

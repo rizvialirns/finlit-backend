@@ -55,7 +55,7 @@ export class Course {
     public courseLevel: string;
 
     @IsNotEmpty()
-    @Column({length: 255})
+    @Column()
     public price: number;
 
     @IsNotEmpty()
