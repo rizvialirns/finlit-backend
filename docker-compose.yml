@@ -24,18 +24,15 @@ services:
     ports:
       - 80:80
 
-  db:
-    image: mariadb:10
+  db: 
+    image: postgres
     container_name: nest-db
-    environment:
-      MYSQL_DATABASE: nest
-      MYSQL_USER: nest
-      MYSQL_PASSWORD: nest
-      MYSQL_ROOT_PASSWORD: root
+    env_file:
+      - database.env 
     ports:
-      - 3306:3306
+      - 5432:5432
     volumes:
-      - mariadbdata:/var/lib/mysql
+      - database-data:/var/lib/postgresql/data/
 
 volumes:
-  mariadbdata:
+  database-data:
