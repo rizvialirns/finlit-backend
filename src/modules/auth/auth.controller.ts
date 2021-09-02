@@ -27,7 +27,12 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async register(@Body() payload: RegisterPayload): Promise<any> {
-    const user = await this.userService.create(payload);
+    const newReg = new  User();
+    newReg.firstName = payload.firstName;
+    newReg.lastName = payload.lastName;
+    newReg.email = payload.email;
+    newReg.password = payload.password; 
+    const user = await this.userService.create(newReg);
     return await this.authService.createToken(user);
   }
 

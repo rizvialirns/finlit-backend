@@ -11,11 +11,16 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
  public async getAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      relations:['roles'],
+    });
   }
 
   public async get(id: number): Promise<User> {
-    return this.userRepository.findOne({ id });
+    return this.userRepository.findOne({
+      relations:['roles'],
+      where: {id},
+    });
   }
 
   public async getByEmail(email: string): Promise<User> {
