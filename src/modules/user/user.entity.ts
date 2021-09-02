@@ -10,6 +10,7 @@ import { Role } from '../role/role.entity';
 import { Course } from '../course/course.entity';
 import { Goal } from '../goal/goal.entity';
 import { PasswordTransformer } from './password.transformer';
+import {Exclude} from 'class-transformer';
 
 @Entity({
   name: 'users',
@@ -35,6 +36,7 @@ export class User {
     length: 255,
     transformer: new PasswordTransformer(),
   })
+  @Exclude()
   password: string;
 
   @Column({

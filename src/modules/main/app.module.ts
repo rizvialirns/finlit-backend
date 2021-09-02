@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from './../auth';
 import { CommonModule } from './../common';
 import { ConfigModule, ConfigService } from './../config';
@@ -8,6 +9,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
+    MulterModule.register(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

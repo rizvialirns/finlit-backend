@@ -6,7 +6,7 @@ import { GoalPackCourses } from '../goal-pack-courses/goalpackcourses.entity';
 export class Goal {
 
     @PrimaryGeneratedColumn()
-    public id: string;
+    public id: number;
 
     @IsNotEmpty()
     @Column()

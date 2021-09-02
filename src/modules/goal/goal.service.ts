@@ -29,7 +29,7 @@ export class GoalService {
         return this.goalRepository.find({creator});
     }
 
-    public async findOne(req: any, id: string): Promise<Goal> {
+    public async findOne(req: any, id: number): Promise<Goal> {
         const creator = await this.userService.get(req.user.id);
         if (!creator) {
             return undefined;
@@ -80,7 +80,7 @@ export class GoalService {
         return  newGoal;
     }
 
-    public async update(id: string , goal: Goal, courses: Course[]): Promise<Goal | undefined> {
+    public async update(id: number , goal: Goal, courses: Course[]): Promise<Goal | undefined> {
         goal.id = id;
         const newGoal = await this.goalRepository.save(goal);
         if (!newGoal) { return undefined; }
@@ -99,7 +99,7 @@ export class GoalService {
     public async updateGoalImage(goal: Goal): Promise<Goal> {
         return await this.goalRepository.save(goal);
     }
-    public async delete(id: string): Promise<void> {
+    public async delete(id: number): Promise<void> {
         const goal = await this.goalRepository.findOne({id});
         await this.goalPackCoursesRepository.delete({goals: [goal]});
         await this.goalRepository.delete(id);

@@ -30,7 +30,7 @@ export class CategoryService {
         return this.categoryRepository.save(category);
     }
 
-    public async delete(id: string): Promise<void> {
+    public async delete(id: number): Promise<void> {
         await this.categoryRepository.delete(id);
         return;
     }
