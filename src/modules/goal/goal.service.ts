@@ -39,16 +39,16 @@ export class GoalService {
 
     public async validateGoal(body: any): Promise<Course[]> {
         let courseCheck = true;
-        const courseObjs: Course[] = new Array();
-        for (const courseid of body.courses) {
-          const resArr = await this.courseService.validateCourse(courseid);
+        const courseArr: Course[] = new Array();
+        for (const courseId of body.courses) {
+          const resArr = await this.courseService.validateCourse(courseId);
           if (resArr.length === 0) {
             courseCheck = false;
           }
-          courseObjs.push(resArr[0]);
+          courseArr.push(resArr[0]);
         }
         if (courseCheck) {
-            return courseObjs;
+            return courseArr;
         } else {
             return [];
         }

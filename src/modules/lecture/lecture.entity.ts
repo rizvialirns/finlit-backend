@@ -1,6 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
-import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinColumn, OneToOne, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {Course} from '../course/course.entity';
+import {CourseLevel} from '../course-level/courselevel.entity';
+
 
 @Entity({name: 'lectures'})
 export class Lecture {
@@ -28,4 +30,6 @@ export class Lecture {
     @JoinColumn({ name: 'id' })
     public course: Course;
 
+    @ManyToOne(() => CourseLevel, level => level.lectures)
+    public  level: CourseLevel;
 }

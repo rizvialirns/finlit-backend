@@ -3,6 +3,7 @@ import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne,
 import {User} from '../user/user.entity';
 import {Lecture} from '../lecture/lecture.entity';
 import {Category} from '../category/category.entity';
+import {CourseLevel} from '../course-level/courselevel.entity';
 import {GoalPackCourses} from '../goal-pack-courses/goalpackcourses.entity';
 export enum CourseLevelEnum {
     Beginner='Beginner',
@@ -74,5 +75,8 @@ export class Course {
 
     @ManyToOne(() => GoalPackCourses, goalPackCourses => goalPackCourses.courses)
     public  goalPackCourses: GoalPackCourses;
+
+    @OneToMany(() => CourseLevel, levels => levels.course)
+    public  levels: CourseLevel[];
 
 }
